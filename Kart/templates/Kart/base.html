@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Quickkart{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+</head>
+
+<body>
+    <div id="header">
+        <a href="/" class="logo">My Shop</a>
+    </div>
+    <div id="subheader">
+        <div id="kart">
+            {% with total_items=kart|length %}
+                {% if kart|length > 0 %}
+                    Your cart:
+                    <a href="{% url "Kart:Kart_detail" %}"
+                       {{ total_items }} item{{ total_items|pluralize }}, ${{ Kart.get_total }}
+                {% else %}
+                    Your cart is empty.
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+
+</body>
+</html>
